@@ -4,18 +4,25 @@ const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
 const cssvars = require('postcss-simple-vars')
 const nested = require('postcss-nested')
+const cssImport = require('postcss-import')
+const browserSync = require('browser-sync').create()
 
 
-gulp.task('default', async function() { await console.log('I created a first Gulp task.')})
-gulp.task('html', async function() { await console.log('Imagine something useful being done to your HTML here.')})
+gulp.task('html', async function() { await browserSync.reload()})
 gulp.task('styles', async function() {
 	return gulp.src('./app/assets/styles/style.css')
-		.pipe(postcss([cssvars, nested, autoprefixer]))
+		.pipe(postcss([cssImport, cssvars, nested, autoprefixer]))
 	 	.pipe(gulp.dest('./app/temp/styles'))
+	 	.pipe(browserSync.stream())
 })
 
 
 gulp.task('watch', async function() {
-	await watch('./app/*.html', gulp.series('html'))
+	await browserSync.init({
+		server: {
+			baseDir: "app"
+		}
+	})
+	await watch('./app/index.html', gulp.series('html'))
 	await watch('./app/assets/styles/**/*.css', gulp.series('styles'))
 })
