@@ -6,12 +6,17 @@ const autoprefixer = require('autoprefixer')
 const cssvars = require('postcss-simple-vars')
 const nested = require('postcss-nested')
 const cssImport = require('postcss-import')
+const mixins = require('postcss-mixins')
 const browserSync = require('browser-sync').create()
 
 
 gulp.task('styles', async function() {
 	return gulp.src('./app/assets/styles/style.css')
-		.pipe(postcss([cssImport, cssvars, nested, autoprefixer]))
+		.pipe(postcss([cssImport, mixins, cssvars, nested, autoprefixer]))
+		.on('error', function(err) {
+			console.log(err.toString())
+			this.emit('end')
+		})
 	 	.pipe(gulp.dest('./app/temp/styles'))
 	 	.pipe(browserSync.stream())
 })
