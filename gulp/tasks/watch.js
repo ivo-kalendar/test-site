@@ -31,5 +31,5 @@ gulp.task('watch', async function() {
 	})
 	await watch('./app/index.html', async function() { await browserSync.reload()})
 	await watch('./app/assets/styles/**/*.css', gulp.series('styles'))
-	await watch('./app/assets/scripts/**/*.js', gulp.series('scripts', function() {browserSync.reload()}))
+	await watch('./app/assets/scripts/**/*.js', gulp.series('modernizr', 'scripts', function() {browserSync.reload()}))
 })
