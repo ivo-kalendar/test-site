@@ -53,4 +53,4 @@ gulp.task('usemin', (function() {
 		.pipe(gulp.dest('./docs'))
 }))
 
-gulp.task('build', gulp.series('deleteDistFolder', 'icons', 'copyGeneralFiles', 'optimizeImages', 'styles', 'scripts', 'usemin'))
+gulp.task('build', gulp.series('deleteDistFolder', 'copyGeneralFiles', 'icons', 'optimizeImages', 'styles', 'scripts', 'usemin'))
