@@ -117,13 +117,13 @@
 		transition: all .3s ease-out;
 		position: relative;
 		z-index: -10;
-		padding-top: 90px;
+		/*padding-top: 150px;*/
 		text-align: center;
 
 		@mixin atMedium {
 			opacity: 1;
 			z-index: 1;
-			padding-top: 0;
+			/*padding-top: 0;*/
 			transform: scale(1);
 		}
 
